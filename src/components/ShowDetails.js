@@ -9,10 +9,17 @@ import {
   Image,
   ListGroup,
 } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faStar,
+  faClock,
+  faCalendarAlt,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
-const API_KEY = "fecb69b9d0ad64dbe0802939fafc338d"; // Replace with your TMDB API Key
-const BASE_URL = "https://api.themoviedb.org/3";
-const STREAM_BASE_URL = "https://hoc.cotuong.top/se_player.php";
+const API_KEY = process.env.REACT_APP_API_KEY;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const EMBED_URL = process.env.REACT_APP_EMBED_URL;
 
 const ShowDetails = () => {
   const { id } = useParams();
@@ -46,7 +53,7 @@ const ShowDetails = () => {
   return (
     <Container className="mt-4 col-md-8">
       <h2 className="mb-3">{movie.title}</h2>
-      <p>{movie.overview || "No description available."}</p>
+      <p>{movie.overview || "Không có mô tả."}</p>
       <Image
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
@@ -58,12 +65,15 @@ const ShowDetails = () => {
       <h4 className="mt-4">Thông Tin Phim</h4>
       <ListGroup className="mb-3">
         <ListGroup.Item>
+          <FontAwesomeIcon icon={faCalendarAlt} className="me-2" />
           <strong>Ngày phát hành:</strong> {movie.release_date}
         </ListGroup.Item>
         <ListGroup.Item>
+          <FontAwesomeIcon icon={faClock} className="me-2" />
           <strong>Thời lượng:</strong> {movie.runtime} phút
         </ListGroup.Item>
         <ListGroup.Item>
+          <FontAwesomeIcon icon={faStar} className="me-2 text-warning" />
           <strong>Điểm đánh giá:</strong> {movie.vote_average} / 10
         </ListGroup.Item>
       </ListGroup>
@@ -71,7 +81,7 @@ const ShowDetails = () => {
       <div className="mb-4">
         <h4>Xem Phim</h4>
         <iframe
-          src={`${STREAM_BASE_URL}?video_id=${id}&tmdb=1`}
+          src={`${EMBED_URL}?video_id=${id}&tmdb=1`}
           width="100%"
           height="500px"
           allowFullScreen
@@ -81,6 +91,7 @@ const ShowDetails = () => {
 
       <Link to="/">
         <Button variant="secondary" className="mb-5">
+          <FontAwesomeIcon icon={faArrowLeft} className="me-2" />
           Quay về trang chủ
         </Button>
       </Link>

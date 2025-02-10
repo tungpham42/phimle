@@ -11,11 +11,13 @@ import {
   Form,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import DefaultPagination from "./DefaultPagination";
 import ShowSearch from "./ShowSearch";
 
-const API_KEY = "fecb69b9d0ad64dbe0802939fafc338d";
-const BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = process.env.REACT_APP_API_KEY;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const PLACEHOLDER_IMAGE = "https://dummyimage.com/260x200/cccccc/555555.png";
 
 const ShowList = () => {
@@ -31,7 +33,7 @@ const ShowList = () => {
     setLoading(true);
     setError(null);
     try {
-      const endpoint = searchQuery ? "/search/movie" : "/discover/movie"; // Use search when a query exists
+      const endpoint = searchQuery ? "/search/movie" : "/discover/movie";
       const { data } = await axios.get(`${BASE_URL}${endpoint}`, {
         params: {
           api_key: API_KEY,
@@ -66,21 +68,23 @@ const ShowList = () => {
 
   return (
     <Container className="mt-4">
-      <h2 className="mb-4">Phim lẻ</h2>
+      <h2 className="mb-4">
+        <FontAwesomeIcon icon={faFilm} className="me-2" />
+        Phim lẻ
+      </h2>
       <ShowSearch
         onSearch={handleSearch}
         onReset={handleReset}
         originalLanguage={originalLanguage}
       />
 
-      {/* Language Selection Dropdown */}
       <Form.Group className="mb-3">
         <Form.Label>Chọn ngôn ngữ gốc</Form.Label>
         <Form.Select
           value={originalLanguage}
           onChange={(e) => {
             setOriginalLanguage(e.target.value);
-            setSearchQuery(""); // Clear search query when language changes
+            setSearchQuery("");
           }}
         >
           <option value="">Tất cả</option>
@@ -124,7 +128,10 @@ const ShowList = () => {
                     to={`/phim/${show.id}`}
                     className="mt-auto d-flex justify-content-start text-decoration-none"
                   >
-                    <Button variant="primary">Xem Phim</Button>
+                    <Button variant="primary">
+                      <FontAwesomeIcon icon={faFilm} className="me-2" /> Xem
+                      Phim
+                    </Button>
                   </Link>
                 </Card.Body>
               </Card>
