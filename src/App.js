@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<ShowList />} />
-        <Route path="/phim/:id" element={<ShowDetails />} />
+        <Route path="/xem/:id" element={<ShowDetails />} />
       </Routes>
     </Router>
   );

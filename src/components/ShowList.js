@@ -125,7 +125,7 @@ const ShowList = () => {
                       : "Không có mô tả."}
                   </Card.Text>
                   <Link
-                    to={`/phim/${show.id}`}
+                    to={`/xem/${show.id}`}
                     className="mt-auto d-flex justify-content-start text-decoration-none"
                   >
                     <Button variant="primary">
