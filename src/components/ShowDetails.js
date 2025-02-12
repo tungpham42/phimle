@@ -14,7 +14,7 @@ import {
   faStar,
   faClock,
   faCalendarAlt,
-  faArrowLeft,
+  faHome,
 } from "@fortawesome/free-solid-svg-icons";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -91,7 +91,7 @@ const ShowDetails = () => {
 
       <Link to="/">
         <Button variant="secondary" className="mb-5">
-          <FontAwesomeIcon icon={faArrowLeft} className="me-2" />
+          <FontAwesomeIcon icon={faHome} className="me-2" />
           Quay về trang chủ
         </Button>
       </Link>
